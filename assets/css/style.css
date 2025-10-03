@@ -1948,6 +1948,7 @@ ul.extra-skills li i {
     -webkit-transform: scale(1);
     transform: scale(1);
     width: 100%;
+	height: auto;
     -webkit-transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     transition: -webkit-transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
