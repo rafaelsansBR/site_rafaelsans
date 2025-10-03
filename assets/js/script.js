@@ -468,8 +468,30 @@
 
 
 
+// ## otimizando os vídeos do youtube
+document.addEventListener("DOMContentLoaded", function() {
+    var youtubeFacades = document.querySelectorAll(".youtube-facade");
 
+    youtubeFacades.forEach(function(facade) {
+        facade.addEventListener("click", function() {
+            var videoId = this.getAttribute("data-embed");
+            var iframe = document.createElement("iframe");
 
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+            iframe.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?rel=0&showinfo=0&autoplay=1");
+            
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            
+            this.innerHTML = "";
+            this.style.paddingBottom = "56.25%"; // Proporção 16:9
+            this.style.height = "0";
+            this.appendChild(iframe);
+        });
+    });
+});
     
 
 })(window.jQuery);

@@ -3472,3 +3472,49 @@ ul.blog_pagination li a:hover {
 		opacity: 0;
 	}
 }
+
+/* Estilos para a Fachada do Vídeo do YouTube */
+.youtube-facade {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 20px; /* Ajuste a margem conforme necessário */
+}
+
+.youtube-facade .youtube-thumbnail {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.youtube-facade:hover .youtube-thumbnail {
+    transform: scale(1.05);
+}
+
+.youtube-facade .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 56px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.youtube-facade:hover .play-button {
+    background-color: #ff0000;
+}
+
+.youtube-facade .play-button::after {
+    content: '';
+    display: block;
+    border-style: solid;
+    border-width: 14px 0 14px 24px;
+    border-color: transparent transparent transparent white;
+}
