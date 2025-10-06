@@ -6,7 +6,6 @@
     $(document).ready(function() {
 
 
-
         /*
          * ----------------------------------------------------------------------------------------
          *  EXTRA JS
@@ -461,37 +460,42 @@
             zIndex: -1,
             display: "none",
         });
-
-
-
     });
-
-
-
-// ## otimizando os vídeos do youtube
-document.addEventListener("DOMContentLoaded", function() {
-    var youtubeFacades = document.querySelectorAll(".youtube-facade");
-
-    youtubeFacades.forEach(function(facade) {
-        facade.addEventListener("click", function() {
-            var videoId = this.getAttribute("data-embed");
-            var iframe = document.createElement("iframe");
-
-            iframe.setAttribute("frameborder", "0");
-            iframe.setAttribute("allowfullscreen", "");
-            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-            iframe.setAttribute("src", "https://www.youtube.com/embed/" + videoId + "?rel=0&showinfo=0&autoplay=1");
-            
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            
-            this.innerHTML = "";
-            this.style.paddingBottom = "56.25%"; // Proporção 16:9
-            this.style.height = "0";
-            this.appendChild(iframe);
-        });
-    });
-});
     
+/*
+ * ----------------------------------------------------------------------------------------
+ * YOUTUBE VIDEO FACADE - JQUERY VERSION
+ * ----------------------------------------------------------------------------------------
+ */
+$('.youtube-facade').on('click', function() {
+    // Pega o ID do vídeo do atributo data-embed
+    var videoId = $(this).data('embed');
+    
+    // Cria o elemento iframe com os atributos necessários
+    var iframe = $('<iframe>', {
+        'frameborder': '0',
+        'allowfullscreen': '',
+        'allow': 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+        'src': 'https://www.youtube.com/embed/' + videoId + '?rel=0&showinfo=0&autoplay=1'
+    });
+
+    // Garante que o iframe ocupe todo o espaço da div
+    iframe.css({
+        'width': '100%',
+        'height': '100%',
+        'position': 'absolute',
+        'top': '0',
+        'left': '0'
+    });
+
+    // Substitui o conteúdo da fachada (imagem e botão) pelo iframe
+    // E ajusta o container para manter a proporção 16:9
+    $(this).css({
+        'padding-bottom': '56.25%',
+        'height': '0',
+        'position': 'relative'
+    }).html(iframe);
+});
+
 
 })(window.jQuery);
