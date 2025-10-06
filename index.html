@@ -25,27 +25,11 @@
 	<!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<!-- FONT AWESOME CSS -->
+    <link rel="preload" href="assets/fonts/remixicon.woff2?t=170" as="font" type="font/woff2" crossorigin>
 	<link rel="stylesheet" href="assets/fonts/remixicon.css">
 	<!-- MAIN STYLE CSS -->
     <link rel="stylesheet" href="assets/css/style.css?06102025">
-    <!-- MAGNIFIC CSS -->
-	<!-- <link rel="preload" href="assets/css/magnific-popup.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/magnific-popup.css"></noscript> -->
-	<!-- NICE SELECT CSS -->
-	<!-- <link rel="preload" href="assets/css/nice-select.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/nice-select.min.css"></noscript> -->
-	<!-- ANIMATE CSS -->
-	<!-- <link rel="preload" href="assets/css/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/animate.min.css"></noscript> -->
-	<!-- SLICK CSS -->
-	<!-- <link rel="preload" href="assets/css/slick.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/slick.min.css"></noscript> -->
-	<!-- SPACING CSS -->
-	<!-- <link rel="preload" href="assets/css/spacing.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/spacing.css"></noscript> -->
-	<!-- RESPONSIVE CSS -->
-	<!-- <link rel="preload" href="assets/css/responsive.css?27032025" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/responsive.css?27032025"></noscript> -->
+    <link rel="preconnect" href="https://img.youtube.com">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -123,14 +107,11 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
-                <video class="video_header" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" disablepictureinpicture="" width="2000" height="850">
+                <video autoplay loop muted playsinline disablepictureinpicture width="2000" height="850">
+                    <source src="assets/videos/header_site_mobile.webm" media="(max-width: 767px)" type="video/webm">
+                    <source src="assets/videos/header_site_mobile.mp4" media="(max-width: 767px)" type="video/mp4">
                     <source src="assets/videos/header_site.webm" type="video/webm">
                     <source src="assets/videos/header_site.mp4" type="video/mp4">
-                    Seu navegador não suporta vídeos.
-                </video>
-                <video class="video_header_mobile" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" disablepictureinpicture="" width="1080" height="1440">
-                    <source src="assets/videos/header_site_mobile.webm" type="video/webm">
-                    <source src="assets/videos/header_site_mobile.mp4" type="video/mp4">
                     Seu navegador não suporta vídeos.
                 </video>
             </div>
@@ -147,7 +128,7 @@
                     <picture>
                         <source srcset="assets/images/projetos/01.webp" type="image/webp">
                         <source srcset="assets/images/projetos/01.jpg" type="image/jpeg">
-                        <img src="assets/images/projetos/01.jpg" alt="Site Institucional Mirex-S" loading="lazy" width="2000" height="850">
+                        <img src="assets/images/projetos/01.jpg" alt="Site Institucional Mirex-S" width="2000" height="850">
                     </picture>
                 </div>
             </div>
@@ -156,7 +137,7 @@
                     <picture>
                         <source srcset="assets/images/projetos/02.webp" type="image/webp">
                         <source srcset="assets/images/projetos/02.jpg" type="image/jpeg">
-                        <img src="assets/images/projetos/02.jpg" alt="Folder para o produto Mirex-XD" loading="lazy" width="1000" height="850">
+                        <img src="assets/images/projetos/02.jpg" alt="Folder para o produto Mirex-XD" width="1000" height="850" fetchpriority="high">
                     </picture>
                 </div>
             </div>
@@ -165,7 +146,7 @@
                     <picture>
                         <source srcset="assets/images/projetos/03.webp" type="image/webp">
                         <source srcset="assets/images/projetos/03.jpg" type="image/jpeg">
-                        <img src="assets/images/projetos/03.jpg" alt="Painel de chão do produto Mirex-XD" loading="lazy" width="1000" height="850">
+                        <img src="assets/images/projetos/03.jpg" alt="Painel de chão do produto Mirex-XD" width="1000" height="850">
                     </picture>
                 </div>
             </div>
