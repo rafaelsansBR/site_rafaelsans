@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Link para o seu sitemap para facilitar a descoberta
+Sitemap: https://rafaelsans.com.br/sitemap.xml
