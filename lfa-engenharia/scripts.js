@@ -1,179 +1,191 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Menu
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuClose = document.getElementById('mobile-menu-close');
-  const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll('a') : [];
-
-  function toggleMenu() {
-    if (mobileMenu) mobileMenu.classList.toggle('hidden');
-  }
-
-  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
-  if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', () => {
-    if (mobileMenu) mobileMenu.classList.add('hidden');
-  }));
-
-  // Header Scroll
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (!header) return;
-    if (window.scrollY > 20) {
-      header.classList.add('bg-[#343434]/95', 'shadow-lg', 'py-3');
-      header.classList.remove('bg-gradient-to-b', 'from-black/60', 'to-transparent', 'py-5');
-    } else {
-      header.classList.remove('bg-[#343434]/95', 'shadow-lg', 'py-3');
-      header.classList.add('bg-gradient-to-b', 'from-black/60', 'to-transparent', 'py-5');
-    }
-  });
-
-  // Back to Top
-  const backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    if (!backToTop) return;
-    if (window.scrollY > 400) {
-      backToTop.classList.remove('hidden');
-      backToTop.classList.add('flex');
-    } else {
-      backToTop.classList.add('hidden');
-      backToTop.classList.remove('flex');
-    }
-  });
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // Modal Consultoria
-  const modal = document.getElementById('consultoria-modal');
-  const openModalBtns = document.querySelectorAll('.open-modal-btn');
-  const closeModalBtn = document.getElementById('close-modal-btn');
-  const modalBackdrop = document.getElementById('modal-backdrop');
-
-  function openModal() {
-    if (modal) {
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-  }
-
-  function closeModal() {
-    if (modal) {
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      // Reset form step
-      const step1 = document.getElementById('modal-step-1');
-      const step2 = document.getElementById('modal-step-2');
-      if (step1) step1.classList.remove('hidden');
-      if (step2) step2.classList.add('hidden');
-    }
-  }
-
-  openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
-  if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-  if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
-
-  // Formspree AJAX - Modal
-  const modalForm = document.getElementById('consultoria-form');
-  const modalSubmitBtn = document.getElementById('modal-submit-btn');
-  const modalError = document.getElementById('modal-error');
-  
-  if (modalForm) {
-    modalForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (modalSubmitBtn) {
-        modalSubmitBtn.disabled = true;
-        modalSubmitBtn.innerHTML = '<svg class="w-5 h-5 animate-spin mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> ENVIANDO...';
-      }
-      if (modalError) modalError.classList.add('hidden');
-
-      const formData = new FormData(modalForm);
-      try {
-        const response = await fetch('https://formspree.io/f/xaqpydjo', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
-        if (response.ok) {
-          document.getElementById('modal-step-1').classList.add('hidden');
-          document.getElementById('modal-step-2').classList.remove('hidden');
-          modalForm.reset();
-        } else {
-          if (modalError) modalError.classList.remove('hidden');
-        }
-      } catch (err) {
-        if (modalError) modalError.classList.remove('hidden');
-      } finally {
-        if (modalSubmitBtn) {
-          modalSubmitBtn.disabled = false;
-          modalSubmitBtn.innerHTML = 'AGENDAR CONSULTORIA';
-        }
-      }
     });
-  }
 
-  // Formspree AJAX - Lead Magnet
-  const leadForm = document.getElementById('lead-form');
-  const leadSubmitBtn = document.getElementById('lead-submit-btn');
-  const leadError = document.getElementById('lead-error');
-  const leadSuccess = document.getElementById('lead-success');
-  const leadFormContainer = document.getElementById('lead-form-container');
+    // Scroll Spy
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('aside nav a, nav.md\\:hidden a');
 
-  if (leadForm) {
-    leadForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (leadSubmitBtn) {
-        leadSubmitBtn.disabled = true;
-        leadSubmitBtn.innerHTML = '<svg class="w-5 h-5 animate-spin mr-2 inline" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Enviando...';
-      }
-      if (leadError) leadError.classList.add('hidden');
+    function onScroll() {
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        let currentSectionId = 'hero';
 
-      const formData = new FormData(leadForm);
-      try {
-        const response = await fetch('https://formspree.io/f/xaqpydjo', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
+        for (let i = sections.length - 1; i >= 0; i--) {
+            const section = sections[i];
+            if (section.offsetTop <= scrollPosition) {
+                currentSectionId = section.getAttribute('id');
+                break;
+            }
+        }
+
+        navLinks.forEach(link => {
+            const hrefAttr = link.getAttribute('href');
+            const section = link.getAttribute('data-section') || (hrefAttr && hrefAttr.startsWith('#') ? hrefAttr.substring(1) : '');
+            if (section === currentSectionId) {
+                // Desktop active classes
+                if (link.closest('aside')) {
+                    link.classList.add('bg-[#E1B14F]', 'text-black');
+                    link.classList.remove('text-gray-400', 'hover:bg-[#E1B14F]', 'hover:text-black');
+                } else {
+                    // Mobile active classes
+                    link.classList.add('text-[#E1B14F]');
+                    link.classList.remove('text-gray-400', 'hover:text-[#E1B14F]');
+                }
+            } else {
+                // Desktop inactive classes
+                if (link.closest('aside')) {
+                    link.classList.remove('bg-[#E1B14F]', 'text-black');
+                    link.classList.add('text-gray-400', 'hover:bg-[#E1B14F]', 'hover:text-black');
+                } else {
+                    // Mobile inactive classes
+                    link.classList.remove('text-[#E1B14F]');
+                    link.classList.add('text-gray-400', 'hover:text-[#E1B14F]');
+                }
+            }
         });
-        if (response.ok) {
-          if (leadFormContainer) leadFormContainer.classList.add('hidden');
-          if (leadSuccess) leadSuccess.classList.remove('hidden');
-          leadForm.reset();
-        } else {
-          if (leadError) leadError.classList.remove('hidden');
-        }
-      } catch (err) {
-        if (leadError) leadError.classList.remove('hidden');
-      } finally {
-        if (leadSubmitBtn) {
-          leadSubmitBtn.disabled = false;
-          leadSubmitBtn.innerHTML = '<svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> Solicitar o Checklist Grátis';
-        }
-      }
+    }
+
+    window.addEventListener('scroll', onScroll);
+    onScroll(); // Initial check
+
+    // Modal logic
+    const modal = document.getElementById('consultancy-modal');
+    const btnHero = document.getElementById('btn-contato-hero');
+    const btnSidebar = document.getElementById('btn-contato-sidebar');
+    const closeBtn = document.getElementById('close-modal');
+    const form = document.getElementById('consultancy-form');
+    const step1 = document.getElementById('modal-step-1');
+    const step2 = document.getElementById('modal-step-2');
+
+    const openModal = (e) => {
+        if (e) e.preventDefault();
+        modal.classList.add('active');
+        step1.classList.remove('hidden');
+        step2.classList.add('hidden');
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+    };
+
+    if (btnHero) btnHero.addEventListener('click', openModal);
+    if (btnSidebar) btnSidebar.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
     });
-  }
 
-  // Intersection Observer for Animations
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Send form data to Formspree
+            const formData = new FormData(form);
+            try {
+                await fetch('https://formspree.io/f/xaqpydjo', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('opacity-100', 'translate-y-0');
-        entry.target.classList.remove('opacity-0', 'translate-y-8');
-        observer.unobserve(entry.target);
-      }
+            // 1. Mostra a etapa e limpa o container para garantir
+            document.getElementById('modal-step-1').style.display = 'none';
+            const container = document.getElementById('modal-step-2');
+            container.style.display = 'block';
+
+            // 2. Injeta o motor do Cal.com e inicializa TUDO de uma vez
+            (function (C, A, L) { 
+                let p = function (a, ar) { a.q.push(ar); }; 
+                let d = C.document; 
+                C.Cal = C.Cal || function () { 
+                    let cal = C.Cal; let ar = arguments; 
+                    if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } 
+                    if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); 
+                }; 
+            })(window, "https://app.cal.com/embed/embed.js", "init");
+
+            Cal("init", "consultoria", {origin: "https://app.cal.com"});
+            Cal("inline", {
+                elementOrSelector: "#my-cal-inline-consultoria-tecnica-especializada",
+                calLink: "lfa-engenharia",
+                config: {
+                    layout: "month_view",
+                    theme: "dark",
+                    cssVarsPerTheme: {
+                        dark: { "cal-brand": "#E1B14F" }
+                    }
+                }
+            });
+        });
+    }
+
+    // Checklist form logic
+    const checklistForm = document.getElementById('form-checklist');
+    if (checklistForm) {
+        checklistForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(checklistForm);
+            try {
+                const response = await fetch(checklistForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    checklistForm.style.display = 'none';
+                    document.getElementById('success-message-checklist').classList.remove('hidden');
+                } else {
+                    alert('Erro ao enviar. Tente novamente.');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Erro ao enviar. Tente novamente.');
+            }
+        });
+    }
+
+    // Swiper Initialization
+    const swiper = new Swiper('.solucoes-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1280: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+            }
+        },
     });
-  }, observerOptions);
 
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
-    observer.observe(el);
-  });
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 });
