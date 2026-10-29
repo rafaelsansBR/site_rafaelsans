@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
 import ProjectGrid from './components/ProjectGrid';
 import SkillsBar from './components/SkillsBar';
@@ -6,8 +7,9 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
+import Links from './components/Links';
 
-const App = () => {
+const PortfolioHome = () => {
   const [showFloating, setShowFloating] = useState(false);
 
   useEffect(() => {
@@ -47,6 +49,17 @@ const App = () => {
         <ScrollToTop />
       </div>
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<PortfolioHome />} />
+        <Route path="/links" element={<Links />} />
+      </Routes>
+    </Router>
   );
 };
 

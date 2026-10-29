@@ -1,0 +1,32 @@
+CORTANDO MITOS · MIREX-S
+Série Fatos e Crenças digital
+
+Abra index.html no Chrome ou Edge. Não é necessário instalar nada.
+
+ESTRUTURA PARA PUBLICAÇÃO
+proposta-serie-fatos-e-crencas/
+  index.html
+  styles.css
+  script.js
+  assets/
+
+Publique esses três arquivos e a pasta assets juntos, dentro da pasta
+proposta-serie-fatos-e-crencas no seu site. O arquivo index.html permite
+acessar o conteúdo pelo endereço da pasta, terminando em
+/proposta-serie-fatos-e-crencas/.
+
+Todos os vídeos, imagens e fontes Avenir usados pelo site estão em assets.
+A apresentação não depende da pasta links nem de arquivos fora desta pasta.
+Os arquivos de origem da pasta links foram preservados.
+
+NAVEGAÇÃO
+Setas esquerda/direita: slide anterior/próximo.
+I: índice com busca. F: tela cheia.
+As capas dos pilotos abrem os vídeos com controles de reprodução.
+O botão de leitura alterna entre slides e página contínua.
+No celular e no tablet, a leitura contínua é ativada automaticamente.
+
+A apresentação contém os 39 slides, 20 roteiros, tabelas e dois pilotos.
+As notas do apresentador foram retiradas da versão para o cliente.
+apresentacao-original.html é uma cópia do HTML antigo e não precisa
+ser enviada ao servidor.
